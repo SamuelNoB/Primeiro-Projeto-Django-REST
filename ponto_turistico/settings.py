@@ -121,6 +121,7 @@ WSGI_APPLICATION = 'ponto_turistico.wsgi.application'
     }
 }"""
 
+# this is just a test
 
 from dj_database_url import parse as dburl
 default_dburl = 'postgres:///' + 'pontos-turisticos'
