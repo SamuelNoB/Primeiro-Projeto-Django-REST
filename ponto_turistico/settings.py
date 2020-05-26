@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+from decouple import config
 import os
 if os.name == 'nt':
     import platform
@@ -33,10 +33,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'krd6_!*89g9dv24ql46q^p=y&l3j$konkg*7j$y5#thcqf!+v9'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -107,8 +107,7 @@ WSGI_APPLICATION = 'ponto_turistico.wsgi.application'
     }
 }"""
 # lembrar de ativar o docker
-
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'pontos-turisticos',
@@ -117,8 +116,13 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     }
-}
+}"""
 
+
+from dj_database_url import parse as dburl
+default_dburl = 'postgres:///' + 'pontos-turisticos'
+
+DATABASES = {'default': config('DATABASE_URL', default=default_dburl, cast=dburl),}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -161,6 +165,8 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = 'images'
 
 MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend' ,)
