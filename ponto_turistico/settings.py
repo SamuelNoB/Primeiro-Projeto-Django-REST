@@ -11,8 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 from decouple import config
 import django_heroku
-from django.contrib.gis.gdal import libgdal
+import dj_database_url
+from dj_database_url import parse as dburl
 import os
+
 if os.name == 'nt':
     import platform
     OSGEO4W = r"C:\OSGeo4W"
@@ -116,10 +118,9 @@ WSGI_APPLICATION = 'ponto_turistico.wsgi.application'
         'PORT': '5432',
     }
 }"""
-
 # this is just a test
 
-from dj_database_url import parse as dburl
+
 default_dburl = 'postgres:///' + 'pontos-turisticos'
 
 DATABASES = {'default': config('DATABASE_URL', default=default_dburl, cast=dburl),}
@@ -172,5 +173,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend' ,)
 }
 
+# DATABASES['default'] = dj_database_url.config()
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 django_heroku.settings(locals())
