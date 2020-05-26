@@ -39,7 +39,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['pontos-django-rest-api.herokuapp.com/', 'localhost:8000']
+ALLOWED_HOSTS = ['pontos-django-rest-api.herokuapp.com', 'localhost:8000']
 
 
 # Application definition
@@ -165,7 +165,6 @@ REST_FRAMEWORK = {
 }
 
 
-
 django_heroku.settings(locals())
 DATABASES = {
     'default': {
@@ -174,6 +173,6 @@ DATABASES = {
         'USER': '*',
         'PASSWORD': '*',
         'HOST': '*',
-        'PORT': '5432',
+        'PORT': '*',
     }
 }
