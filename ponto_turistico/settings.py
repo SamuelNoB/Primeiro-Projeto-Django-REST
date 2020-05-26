@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 from decouple import config
+import django_heroku
 import os
 if os.name == 'nt':
     import platform
@@ -171,3 +172,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend' ,)
 }
+
+django_heroku.settings(locals())
