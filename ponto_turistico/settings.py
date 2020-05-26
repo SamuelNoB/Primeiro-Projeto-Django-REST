@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 from decouple import config
 import django_heroku
+from django.contrib.gis.gdal import libgdal
 import os
 if os.name == 'nt':
     import platform
@@ -22,8 +23,9 @@ if os.name == 'nt':
     os.environ['GDAL_DATA'] = OSGEO4W + r"\share\gdal"
     os.environ['PROJ_LIB'] = OSGEO4W + r"\share\proj"
     os.environ['PATH'] = OSGEO4W + r"\bin;" + os.environ['PATH']
-
-
+    libgdal.lib_names.append('gdal300', 'gdal111')
+elif os.name == 'posix':
+    libgdal.lib_names.append('gdal3.0.0', 'gdal1.1.1')
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -172,5 +174,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend' ,)
 }
+
 
 django_heroku.settings(locals())
