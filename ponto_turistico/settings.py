@@ -168,17 +168,17 @@ REST_FRAMEWORK = {
 }
 
 django_heroku.settings(locals())
-"""DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'pontos-turisticos',
-        'USER': '*',
-        'PASSWORD': '*',
-        'HOST': '*',
-        'PORT': '*',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
-}"""
-DATABASES = {
+}
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'pontos-turisticos',
@@ -187,4 +187,4 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '5432',
     }
-}
+}"""
