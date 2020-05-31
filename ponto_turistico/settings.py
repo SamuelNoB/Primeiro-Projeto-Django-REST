@@ -35,11 +35,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-django_heroku.settings(locals())
+
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
+
 
 ALLOWED_HOSTS = ['pontos-django-rest-api.herokuapp.com', 'localhost:8000']
 
@@ -166,9 +167,8 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend' ,)
 }
 
-
-
-DATABASES = {
+django_heroku.settings(locals())
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'pontos-turisticos',
@@ -176,5 +176,15 @@ DATABASES = {
         'PASSWORD': '*',
         'HOST': '*',
         'PORT': '*',
+    }
+}"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': 'pontos-turisticos',
+        'USER': 'postgres',
+        'PASSWORD': 'Samuel09',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
