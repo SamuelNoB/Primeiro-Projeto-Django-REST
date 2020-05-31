@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 from decouple import config
 import django_heroku
 import dj_database_url
-from dj_database_url import parse as dburl
 import os
 
 if os.name == 'nt':
@@ -117,9 +116,8 @@ WSGI_APPLICATION = 'ponto_turistico.wsgi.application'
 
 
 default_dburl = 'postgres:///' + 'pontos-turisticos'
-DATABASES = {'default': dj_database_url.config()}
+DATABASES = {'default': config('DATABASE_URL', default=default_dburl, cast=dj_database_url.parse)}
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
