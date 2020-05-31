@@ -116,9 +116,14 @@ WSGI_APPLICATION = 'ponto_turistico.wsgi.application'
 # this is just a test
 
 
-# default_dburl = 'postgres:///' + 'pontos-turisticos'
+default_dburl = 'postgres:///' + 'pontos-turisticos'
 
-# DATABASES = {'default': config('DATABASE_URL', default=default_dburl, cast=dburl),}
+DATABASES = {
+    'default': {
+        config('DATABASE_URL', default=default_dburl, cast=dburl),
+        config('ENGINE', default='django.contrib.gis.db.backends.postgis')
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -169,16 +174,7 @@ REST_FRAMEWORK = {
 }
 
 django_heroku.settings(locals())
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': '*',
-        'USER': '*',
-        'PASSWORD': '*',
-        'HOST': '*',
-        'PORT': '5432',
-    }
-}
+
 """DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
