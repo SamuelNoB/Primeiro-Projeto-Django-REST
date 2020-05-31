@@ -117,9 +117,8 @@ WSGI_APPLICATION = 'ponto_turistico.wsgi.application'
 
 
 default_dburl = 'postgres:///' + 'pontos-turisticos'
-DATABASES = {}
-DATABASES['default']['DATABASE_URL'] = config('DATABASE_URL', default=default_dburl, cast=dburl)
-DATABASES['default']['ENGINE'] = config('ENGINE', default='django.contrib.gis.db.backends.postgis')
+DATABASES = {'default': dj_database_url.config()}
+DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 
 # Password validation
