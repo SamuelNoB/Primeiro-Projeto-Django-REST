@@ -172,7 +172,7 @@ django_heroku.settings(locals())
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': '*',
+        'NAME': 'd2aj4pinp1hfe5',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
